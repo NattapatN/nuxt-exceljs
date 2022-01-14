@@ -7,7 +7,6 @@
 
 <script>
 import * as Excel from "exceljs/dist/exceljs.min.js";
-import * as ExcelProper from "exceljs";
 import * as FileSaver from 'file-saver';
 export default {
     data() {
@@ -25,7 +24,7 @@ export default {
             var worksheet = workbook.addWorksheet('My Sheet');
 
             worksheet.columns = [
-            { header: 'Id', key: 'id', width: 10 },
+                { header: 'Id', key: 'id', width: 10 },
             { header: 'Name', key: 'name', width: 32 },
             { header: 'D.O.B.', key: 'DOB', width: 10 }
             ];
@@ -36,6 +35,10 @@ export default {
             };
             worksheet.addRow({ id: 1, name: 'Ionic Android', dob: new Date(1970, 1, 1) });
             worksheet.addRow({ id: 2, name: 'Ionic iOS', dob: new Date(1965, 1, 7) });
+            let rowValue = []
+            rowValue[1] = "time period"
+            rowValue[23]= "correct"
+                 worksheet.insertRow(1,rowValue);
             var tempFilePath = 'PATH/temp.xlsx'; // PATH is where you want to create your file
 
             workbook.xlsx.writeBuffer().then(buffer => FileSaver.saveAs(new Blob([buffer]), `${Date.now()}_feedback.xlsx`)).catch(err => console.log('Error writing excel export', err))
